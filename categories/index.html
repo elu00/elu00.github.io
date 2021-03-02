@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
-  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
@@ -13,6 +13,9 @@
 <meta name="description" content="Personal website">
 
 
+  <meta name="author" content="Ethan Lu">
+  
+
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en">
@@ -20,6 +23,8 @@
 <meta property="og:title" content="Posts by Category">
 <meta property="og:url" content="https://elu00.github.io/categories/">
 
+
+  <meta property="og:description" content="Personal website">
 
 
 
@@ -41,19 +46,16 @@
 
 
 
-
-
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
       "@type": "Person",
       "name": "Site/Blog",
-      "url": "https://elu00.github.io",
-      "sameAs": null
-    }
-  </script>
-
+      "url": "https://elu00.github.io/"
+    
+  }
+</script>
 
 
   <meta name="google-site-verification" content="sTLGeFSlyjze5wEirAwfzp61KQxKTZ-WXe6iRa_WWYQ" />
@@ -65,7 +67,9 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="elu00 Feed">
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="elu00 Feed">
+
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,8 +80,9 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
-<!--[if IE ]>
+<!--[if IE]>
   <style>
     /* old IE unsupported flexbox fixes */
     .greedy-nav .site-title {
@@ -93,7 +98,6 @@
 <![endif]-->
 
 
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
 
     <!-- The loading of KaTeX is deferred to speed up page rendering -->
@@ -105,6 +109,14 @@
   </head>
 
   <body class="layout--categories">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
@@ -117,15 +129,18 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-        <a class="site-title" href="/">elu00</a>
+        <a class="site-title" href="/">
+          elu00
+          
+        </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/year-archive/" >Posts</a>
+              <a href="/year-archive/">Posts</a>
             </li><li class="masthead__menu-item">
-              <a href="/categories/" >Categories</a>
+              <a href="/categories/">Categories</a>
             </li><li class="masthead__menu-item">
-              <a href="/about/" >About/Projects</a>
+              <a href="/about/">About/Projects</a>
             </li><li class="masthead__menu-item">
-              <a href="/assets/resume.pdf" >Resume</a>
+              <a href="/assets/resume.pdf">Resume</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -162,8 +177,6 @@
   
     <div class="author__avatar">
       
-
-      
         <img src="/assets/images/profile.png" alt="Ethan Lu" itemprop="image">
       
     </div>
@@ -174,9 +187,10 @@
       <h3 class="author__name" itemprop="name">Ethan Lu</h3>
     
     
-      <p class="author__bio" itemprop="description">
-        Math Student at Carnegie Mellon
-      </p>
+      <div class="author__bio" itemprop="description">
+        <p>Math Student at Carnegie Mellon</p>
+
+      </div>
     
   </div>
 
@@ -197,7 +211,7 @@
         <li>
           <a href="mailto:elu@nevada.unr.edu">
             <meta itemprop="email" content="elu@nevada.unr.edu" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
           </a>
         </li>
       
@@ -221,7 +235,7 @@
       
         <li>
           <a href="https://github.com/elu00" itemprop="sameAs" rel="nofollow noopener noreferrer">
-            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span>
           </a>
         </li>
       
@@ -267,6 +281,7 @@
   </div>
 
 
+
   <div class="archive">
     
       <h1 id="page-title" class="page__title">Posts by Category</h1>
@@ -306,6 +321,7 @@
 </ul>
 
 
+
   
     
       <section id="projects" class="taxonomy__section">
@@ -319,21 +335,33 @@
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/viz.ml/" rel="permalink">HackCMU 2018: Viz.ml
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  2 minute read
-</p>
+  <p class="page__meta">
     
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Programming is hard
 </p>
   </article>
@@ -347,21 +375,33 @@
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/projects/Build-Log-Part-0/" rel="permalink">DIY 10 Channel PWM Controller - Build Log Part 0
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  1 minute read
-</p>
+  <p class="page__meta">
     
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">Thoughts, plans, and hardware for a 10-channel Arduino-based PWM Controller
 </p>
   </article>
@@ -369,7 +409,7 @@
 
           
         </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
       </section>
     
   
@@ -391,21 +431,33 @@
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/math/markov-pt1/" rel="permalink">Markov Chains and the Perron-Frobenius theorem (Part 1/2)
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
 
-
-
-
-  12 minute read
-</p>
+  <p class="page__meta">
     
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
     <p class="archive__item-excerpt" itemprop="description">A neat result in Linear Algebra
 </p>
   </article>
@@ -413,7 +465,7 @@
 
           
         </div>
-        <a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
       </section>
     
   
@@ -425,13 +477,18 @@
 
     
       <div class="search-content">
-        <div class="search-content__inner-wrap"><input type="search" id="search" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
-    <div id="results" class="results"></div></div>
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
 
       </div>
     
 
-    <div class="page__footer">
+    <div id="footer" class="page__footer">
       <footer>
         <!-- start custom footer snippets -->
 
@@ -444,18 +501,19 @@
 
     
 
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 Site/Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 Site/Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/assets/js/main.min.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
 
 
 
