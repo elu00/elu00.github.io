@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
@@ -64,6 +64,7 @@
 
 
 
+
 <!-- end _includes/seo.html -->
 
 
@@ -80,22 +81,9 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
 
-<!--[if IE]>
-  <style>
-    /* old IE unsupported flexbox fixes */
-    .greedy-nav .site-title {
-      padding-right: 3em;
-    }
-    .greedy-nav button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-    }
-  </style>
-<![endif]-->
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
@@ -110,7 +98,6 @@
 
   <body class="layout--single">
     <nav class="skip-links">
-  <h2 class="screen-reader-text">Skip links</h2>
   <ul>
     <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
     <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
@@ -134,20 +121,16 @@
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
               <a href="/year-archive/">Posts</a>
-            </li><li class="masthead__menu-item">
-              <a href="/categories/">Categories</a>
-            </li><li class="masthead__menu-item">
-              <a href="/about/">About/Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/assets/resume.pdf">Resume</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
-          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
-            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
-          </svg>
+          <i class="fas fa-search"></i>
         </button>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -301,40 +284,43 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Hi! 
-I’m a student in Mathematical Sciences and a member of the <a href="http://geometry.cs.cmu.edu/">Geometry Collective</a> at Carnegie Mellon University.
-Broadly speaking, I’m interested in problems that happen at the intersection of mathematics and computer science, whether that happens to manifest itself within the fields of geometry processing, finance, or competitive mathematics.
-I also like playing Tetris.</p>
+        Hi! 
+I'm a student in Mathematical Sciences and a member of the [Geometry Collective](http://geometry.cs.cmu.edu/) at Carnegie Mellon University.
+Broadly speaking, I'm interested in problems that happen at the intersection of mathematics and computer science, whether that happens to manifest itself within the fields of geometry processing, finance, or competitive mathematics.
+I also like playing Tetris.
 
-<p>This site exists both in the hopes that someone will find the content here useful and to serve as some sort of documentation for myself; hopefully both of those goals are achieved to some extent or another.</p>
+This site exists both in the hopes that someone will find the content here useful and to serve as some sort of documentation for myself; hopefully both of those goals are achieved to some extent or another.
 
-<p>Here’s a short list of some stuff I’ve done:</p>
-<h1 id="handouts">Handouts</h1>
-<p>That I’m too lazy to turn into a post</p>
-<ul>
-  <li><a href="../assets/MSAnalysisSeminar.pdf">Smooth Bump Partitions and Partitions of Unity</a></li>
-</ul>
+Here's a short list of some stuff I've done:
+# Research
+## Surfactant Dynamics from the Arnold Perspective 
+- [Paper](https://www.doi.org/10.1137/20S1378144)
+- [Poster](surfactants/.pdf)
 
-<h1 id="projects">Projects</h1>
-<h2 id="vizml">viz.ml</h2>
-<ul>
-  <li>[HackCMU 2018] An interactive dimensionality reduction visualization engine for introspection of high dimensional data sets.</li>
-  <li><a href="https://github.com/TheNumbat/viz.ml">Github</a></li>
-  <li><a href="../viz.ml">Blog Post</a></li>
-  <li><a href="https://github.com/TheNumbat/viz.ml/releases">Download</a></li>
-</ul>
+## Central Limit Theorems for Compound Paths on the 2-Dimensional Lattice
+- [Paper](https://arxiv.org/pdf/1906.10645.pdf)
+- [Slides]()
 
-<h2 id="pwmduino">PWMDuino</h2>
-<ul>
-  <li>An Arduino-based 8 channel PWM Controller</li>
-  <li><a href="#">(Yet to be Uploaded) Build Video</a></li>
-  <li><a href="../tags/controller-build-log/">WIP Build Log</a></li>
-  <li><a href="https://github.com/elu00/PWMduino">Github Repo</a></li>
-</ul>
+# Handouts 
+That I'm too lazy to turn into a post
+- [Smooth Bump Partitions and Partitions of Unity](assets/MSAnalysisSeminar.pdf) 
 
-<h1 id="the-site">The site</h1>
-<p>This site is powered by <a href="https://jekyllrb.com/">Jekyll</a>, <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/">Minimal Mistakes</a>, <a href="https://katex.org/"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>KaTeX</mtext></mrow><annotation encoding="application/x-tex">\KaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">K</span><span class="mspace" style="margin-right:-0.17em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord"><span class="mord textrm mtight sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span></a>, <a href="https://travis-ci.org/">Travis</a>, and <a href="https://pages.github.com/">Github Pages</a>.<br />
-If you’re interested, you can see the source for the entire setup <a href="https://github.com/elu00/blog-src">here</a>.</p>
+# Projects
+## viz.ml
+- [HackCMU 2018] An interactive dimensionality reduction visualization engine for introspection of high dimensional data sets.
+- [Github](https://github.com/TheNumbat/viz.ml)
+- [Blog Post](../viz.ml) 
+- [Download](https://github.com/TheNumbat/viz.ml/releases)
+
+## PWMDuino
+- An Arduino-based 8 channel PWM Controller
+- [(Yet to be Uploaded) Build Video](#)
+- [WIP Build Log](../tags/controller-build-log/)
+- [Github Repo](https://github.com/elu00/PWMduino)
+
+# The site
+This site is powered by [Jekyll](https://jekyllrb.com/), [Minimal Mistakes](https://mademistakes.com/work/minimal-mistakes-jekyll-theme/), [<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>KaTeX</mtext></mrow><annotation encoding="application/x-tex">\KaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.89883em;vertical-align:-0.2155em;"></span><span class="mord text"><span class="mord textrm">K</span><span class="mspace" style="margin-right:-0.17em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord"><span class="mord textrm mtight sizing reset-size6 size3">A</span></span></span></span></span></span><span class="mspace" style="margin-right:-0.15em;"></span><span class="mord text"><span class="mord textrm">T</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.46782999999999997em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord textrm">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="margin-right:-0.125em;"></span><span class="mord textrm">X</span></span></span></span></span></span>](https://katex.org/), [Travis](https://travis-ci.org/), and [Github Pages](https://pages.github.com/).  
+If you're interested, you can see the source for the entire setup [here](https://github.com/elu00/blog-src). 
 
         
       </section>
@@ -345,6 +331,7 @@ If you’re interested, you can see the source for the entire setup <a href="htt
 
 
         
+
 
       </footer>
 
