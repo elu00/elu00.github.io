@@ -41,5 +41,5 @@ Various material/writeups that I've collected over the years.
 - [A quick guide to setting up {% katex %}\LaTeX{% endkatex %}](/LatexQuickStart/) 
 
 ## The site
-This site is powered by [Jekyll](https://jekyllrb.com/), [Minimal Mistakes](https://mademistakes.com/work/minimal-mistakes-jekyll-theme/), [{% katex %}\KaTeX{% endkatex %}](https://katex.org/), [Travis](https://travis-ci.org/), and [Github Pages](https://pages.github.com/). 
-If you're interested, you can see the source for the entire setup [here](https://github.com/elu00/blog-src).
+This site is powered by [Jekyll](https://jekyllrb.com/), [Minimal Mistakes](https://mademistakes.com/work/minimal-mistakes-jekyll-theme/), [{% katex %}\KaTeX{% endkatex %}](https://katex.org/), and [Github Pages](https://pages.github.com/). 
+If you're interested, you can see the source for the entire setup [here](https://github.com/elu00/elu00.github.io).
