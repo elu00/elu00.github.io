@@ -16,6 +16,11 @@ This site exists both in the hopes that someone will find the content here usefu
 
 Here's a short list of some stuff I've done:
 ## Research
+### Using Bernoulli maps to accelerate mixing of a random walk on the torus
+Gautam Iyer, Ethan Lu, James Nolen.\
+To appear in [The Quarterly of Applied Mathematics](https://www.ams.org/publications/journals/journalsframework/qam)\
+[Paper](https://arxiv.org/abs/2303.03528){: .btn .btn--info}
+
 ### Surfactant Dynamics from the Arnold Perspective 
 <!--![image-left](/assets/images/surfactants-thumb.png){: .align-left .img_drop}-->
 Ethan Lu, J. Jenkins, C. Lee, Y. Liu, D. Reed.\
