@@ -15,11 +15,14 @@ Having been standard features in online/dedicated editors like TeXStudio or Over
 Unfortunately for WSL users like myself, however, this integration seems to interact poorly with the Linux/Windows exectuable bridge.
 After trying several PDF viewers, the only one I could find that worked with my setup was sioyek, though some extra effort (including submitting a patch!) was required in setting it up.
 Here's a quick tldr of the configuration that I'm currently using.
+
 # Requirements
 It's unlikely that any of these version numbers are hard requirements, but I'm listing them here in case they're useful for troubleshooting.
 - [Neovim](https://neovim.io/) installed under WSL, version ≥ 0.6.1
 - [VimTex](https://github.com/lervag/vimtex) installed under the neovim version above, version ≥ 2.12
 - [Sioyek](https://sioyek.info/) installed on windows, built after Feb 19 2023 (see below for a link to prebuilt binaries)
+
+
 # Setup
 ## init.vim
 Add the following three lines to your `init.vim`
