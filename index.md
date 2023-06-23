@@ -19,7 +19,9 @@ Here's a short list of some stuff I've done:
 ### Using Bernoulli maps to accelerate mixing of a random walk on the torus
 Gautam Iyer, Ethan Lu, James Nolen.\
 To appear in [The Quarterly of Applied Mathematics](https://www.ams.org/publications/journals/journalsframework/qam)\
-[Paper](https://arxiv.org/abs/2303.03528){: .btn .btn--info}
+[Preprint](https://arxiv.org/abs/2303.03528){: .btn .btn--info}
+[Journal](https://doi.org/10.1090/qam/1668){: .btn .btn--info}
+
 
 ### Surfactant Dynamics from the Arnold Perspective 
 <!--![image-left](/assets/images/surfactants-thumb.png){: .align-left .img_drop}-->
@@ -38,7 +40,7 @@ Invited talk at the [19th International Conference on Fibonacci Numbers](http://
 [Slides](assets/ZeckendorfSlides.pdf){: .btn .btn--info}
 
 ## Handouts 
-Various material/writeups that I've collected over the years.
+Various material/writeups that I've collected over, roughly in reverse chronological order.
 - [Notes on Symmetric Hyperbolic Systems](assets/SymmetricHyperbolicNotes.pdf) 
 - [Recitation Notes for 21-237/238 (Honors Algebra I/II)](assets/recitations.pdf) 
 - [Notes from 80-524: The Topology of Learning](assets/TopoNotes.pdf) 
