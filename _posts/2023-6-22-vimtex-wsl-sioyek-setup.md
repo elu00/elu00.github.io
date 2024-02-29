@@ -38,4 +38,6 @@ let g:vimtex_callback_progpath = 'wsl nvim'
 ```
 vimtex_wsl_fix 1
 ```
+
+
 and that's it!
