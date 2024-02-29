@@ -5,12 +5,12 @@ author_profile: true
 classes: wide
 ---
 Hi!
-I'm an aspiring mathematical analyst and PhD student at Stanford, where I am generously supported by an [NSF Graduate Research Fellowship](https://www.nsfgrfp.org/).
+I'm an aspiring mathematical analyst and PhD student at Stanford, where I am advised by [Jonathan Luk](https://web.stanford.edu/~jluk/) and generously supported by an [NSF Graduate Research Fellowship](https://www.nsfgrfp.org/).
 
 Previously, I was an undergraduate at Carnegie Mellon University, where I completed the honors degree program under the supervision of [Gautam Iyer](https://www.math.cmu.edu/~gautam/sj/index.html).
 As an undergraduate, I also worked with [Ian Tice](https://www.math.cmu.edu/~iantice/index.html) on various problems in fluids and with [Keenan Crane](https://www.cs.cmu.edu/~kmcrane/) on problems in discrete differential geometry as a member of the [Geometry Collective](http://geometry.cs.cmu.edu/).
 
-Broadly speaking, my research interests lie in the field of "applied analysis"-that is, the application of analytical tools and ideas to other branches of mathematics and computer science, ranging from differential geometry and the calculus of variations to geometry processing and computer graphics.
+My current research interests are primarily in the realm of nonlinear partial differential equations, particularly those originating from general relativity or other physical contexts.
 
 This site exists both in the hopes that someone will find the content here useful and to serve as some sort of documentation for myself; hopefully both of those goals are achieved to some extent.
 
@@ -40,7 +40,7 @@ Invited talk at the [19th International Conference on Fibonacci Numbers](http://
 [Slides](assets/ZeckendorfSlides.pdf){: .btn .btn--info}
 
 ## Handouts 
-Various material/writeups that I've collected over, roughly in reverse chronological order.
+Various handouts that I've written, sorted in approximately reverse chronological order.
 - [Notes on Symmetric Hyperbolic Systems](assets/SymmetricHyperbolicNotes.pdf) 
 - [Recitation Notes for 21-237/238 (Honors Algebra I/II)](assets/recitations.pdf) 
 - [Notes from 80-524: The Topology of Learning](assets/TopoNotes.pdf) 
