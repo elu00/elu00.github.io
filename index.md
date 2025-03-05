@@ -18,7 +18,7 @@ Here's a short list of some stuff I've done:
 ## Research
 ### Using Bernoulli maps to accelerate mixing of a random walk on the torus
 Gautam Iyer, Ethan Lu, James Nolen.\
-[The Quarterly of Applied Mathematics 82](https://www.ams.org/journals/qam/2024-82-02/)\
+[The Quarterly of Applied Mathematics, vol. 82](https://www.ams.org/journals/qam/2024-82-02/)\
 [Preprint](https://arxiv.org/abs/2303.03528){: .btn .btn--info}
 [Journal](https://doi.org/10.1090/qam/1668){: .btn .btn--info}
 
