@@ -41,6 +41,7 @@ Invited talk at the [19th International Conference on Fibonacci Numbers](http://
 
 ## Handouts 
 Various handouts that I've written, sorted in approximately reverse chronological order.
+- The [syllabus](assets/area_syllabus.pdf) and [slides](assets/area_slides.pdf) for my area exam.
 - [Notes on Symmetric Hyperbolic Systems](assets/SymmetricHyperbolicNotes.pdf) 
 - [Recitation Notes for 21-237/238 (Honors Algebra I/II)](assets/recitations.pdf) 
 - [Notes from 80-524: The Topology of Learning](assets/TopoNotes.pdf) 
