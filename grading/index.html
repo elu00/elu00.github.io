@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Entry System</title>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useRef } = React;
+
+    const Upload = ({ className }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+      </svg>
+    );
+
+    const Download = ({ className }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+      </svg>
+    );
+
+    const Check = ({ className }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      </svg>
+    );
+
+    const GradeEntryApp = () => {
+      const [csvData, setCsvData] = useState(null);
+      const [students, setStudents] = useState([]);
+      const [assignmentName, setAssignmentName] = useState('');
+      const [assignmentCol, setAssignmentCol] = useState(-1);
+      const [inputValue, setInputValue] = useState('');
+      const [suggestions, setSuggestions] = useState([]);
+      const [selectedIndex, setSelectedIndex] = useState(-1);
+      const [showSuggestions, setShowSuggestions] = useState(false);
+      const [recentEntry, setRecentEntry] = useState('');
+      const [gradeValue, setGradeValue] = useState('1');
+      
+      const fileInputRef = useRef(null);
+      const assignmentInputRef = useRef(null);
+      const studentInputRef = useRef(null);
+      const gradeInputRef = useRef(null);
+
+      // Fuzzy match function
+      const fuzzyMatch = (input, target) => {
+        const searchTerms = input.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+        const targetLower = target.toLowerCase();
+        
+        return searchTerms.every(term => targetLower.includes(term));
+      };
+
+      // Handle file upload
+      const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        Papa.parse(file, {
+          complete: (results) => {
+            const data = results.data;
+            
+            // Extract student names from first column, starting from row 3 (index 2)
+            // Row 0: Headers, Row 1: Points Possible, Row 2+: Student data
+            const studentList = [];
+            for (let i = 2; i < data.length; i++) {
+              if (data[i] && data[i][0] && data[i][0].trim()) {
+                // Skip the "Points Possible" row and any empty rows
+                const name = data[i][0].trim();
+                if (!name.startsWith('Points Possible') && name !== '') {
+                  studentList.push({
+                    name: name,
+                    rowIndex: i
+                  });
+                }
+              }
+            }
+            
+            setCsvData(data);
+            setStudents(studentList);
+            
+            // Focus on assignment name input
+            setTimeout(() => {
+              if (assignmentInputRef.current) {
+                assignmentInputRef.current.focus();
+              }
+            }, 100);
+          },
+          error: (error) => {
+            alert('Error parsing CSV: ' + error.message);
+          }
+        });
+      };
+
+      // Initialize assignment column
+      const initializeAssignment = () => {
+        if (!assignmentName.trim()) {
+          alert('Please enter an assignment name');
+          return;
+        }
+
+        const newData = [...csvData];
+        const headerRow = newData[0];
+        const pointsRow = newData[1];
+        
+        // Find the column index for the assignment
+        let colIndex = headerRow.findIndex(h => h === assignmentName);
+        
+        if (colIndex === -1) {
+          // Add new column
+          colIndex = headerRow.length;
+          headerRow[colIndex] = assignmentName;
+          // Set points possible to empty or maintain format
+          pointsRow[colIndex] = '';
+        }
+        
+        // Initialize all student grades to blank (starting from row 2, not row 1)
+        for (let i = 2; i < newData.length; i++) {
+          if (!newData[i]) newData[i] = [];
+          newData[i][colIndex] = '';
+        }
+        
+        setCsvData(newData);
+        setAssignmentCol(colIndex);
+        
+        // Focus on student input
+        setTimeout(() => {
+          if (studentInputRef.current) {
+            studentInputRef.current.focus();
+          }
+        }, 100);
+      };
+
+      // Handle input change and generate suggestions
+      const handleInputChange = (e) => {
+        const value = e.target.value;
+        setInputValue(value);
+        setSelectedIndex(-1);
+        
+        if (value.trim()) {
+          const filtered = students.filter(s => fuzzyMatch(value, s.name));
+          setSuggestions(filtered);
+          setShowSuggestions(filtered.length > 0);
+        } else {
+          setSuggestions([]);
+          setShowSuggestions(false);
+        }
+      };
+
+      // Handle keyboard navigation
+      const handleKeyDown = (e) => {
+        if (!showSuggestions) return;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIndex(prev => 
+            prev < suggestions.length - 1 ? prev + 1 : prev
+          );
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIndex(prev => prev > -1 ? prev - 1 : -1);
+        } else if (e.key === 'Tab' && suggestions.length > 0) {
+          e.preventDefault();
+          if (selectedIndex === -1) {
+            setSelectedIndex(0);
+          } else {
+            setSelectedIndex(prev => 
+              prev < suggestions.length - 1 ? prev + 1 : 0
+            );
+          }
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
+            enterGrade(suggestions[selectedIndex]);
+          } else if (suggestions.length === 1) {
+            enterGrade(suggestions[0]);
+          }
+        } else if (e.key === 'Escape') {
+          setShowSuggestions(false);
+          setSelectedIndex(-1);
+        }
+      };
+
+      // Enter grade for student
+      const enterGrade = (student) => {
+        const newData = [...csvData];
+        newData[student.rowIndex][assignmentCol] = gradeValue;
+        setCsvData(newData);
+        
+        // Show confirmation
+        setRecentEntry(`✓ Grade of ${gradeValue} entered for ${student.name}`);
+        setTimeout(() => setRecentEntry(''), 2000);
+        
+        // Clear input and suggestions
+        setInputValue('');
+        setSuggestions([]);
+        setShowSuggestions(false);
+        setSelectedIndex(-1);
+        
+        // Keep focus on input
+        if (studentInputRef.current) {
+          studentInputRef.current.focus();
+        }
+      };
+
+      // Export to CSV
+      const exportCSV = () => {
+        if (!csvData) return;
+        
+        const csv = Papa.unparse(csvData);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `grades_${assignmentName.replace(/[^a-z0-9]/gi, '_')}_${Date.now()}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+
+      // Get grade counts for display
+      const getGradeCounts = () => {
+        if (!csvData || assignmentCol === -1) return { graded: 0, total: 0 };
+        
+        let graded = 0;
+        let total = 0;
+        
+        for (let i = 2; i < csvData.length; i++) {
+          if (csvData[i] && csvData[i][0] && csvData[i][0].trim()) {
+            total++;
+            if (csvData[i][assignmentCol] && csvData[i][assignmentCol].trim() !== '') {
+              graded++;
+            }
+          }
+        }
+        
+        return { graded, total };
+      };
+
+      const counts = getGradeCounts();
+
+      return (
+        <div className="min-h-screen bg-gray-50 p-8">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-3xl font-bold text-gray-900 mb-8">Grade Entry System</h1>
+            
+            {!csvData ? (
+              <div className="bg-white rounded-lg shadow-md p-8">
+                <div className="flex flex-col items-center">
+                  <Upload className="w-16 h-16 text-gray-400 mb-4" />
+                  <h2 className="text-xl font-semibold mb-4">Upload Grade CSV</h2>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".csv"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                  >
+                    Select CSV File
+                  </button>
+                  <p className="text-sm text-gray-500 mt-4">
+                    Upload a CSV file in Canvas gradebook format
+                  </p>
+                </div>
+              </div>
+            ) : assignmentCol === -1 ? (
+              <div className="bg-white rounded-lg shadow-md p-8">
+                <h2 className="text-xl font-semibold mb-4">Enter Assignment Name</h2>
+                <div className="flex gap-4">
+                  <input
+                    ref={assignmentInputRef}
+                    type="text"
+                    value={assignmentName}
+                    onChange={(e) => setAssignmentName(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && initializeAssignment()}
+                    placeholder="e.g., Worksheet 7"
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    onClick={initializeAssignment}
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                  >
+                    Start Grading
+                  </button>
+                </div>
+                <p className="text-sm text-gray-500 mt-4">
+                  {students.length} students loaded from CSV
+                </p>
+              </div>
+            ) : (
+              <div className="flex gap-8">
+                <div className="flex-1">
+                  <div className="bg-white rounded-lg shadow-md p-6">
+                    <h2 className="text-xl font-semibold mb-4">Enter Grades - {assignmentName}</h2>
+                    
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Grade Value
+                      </label>
+                      <input
+                        ref={gradeInputRef}
+                        type="text"
+                        value={gradeValue}
+                        onChange={(e) => setGradeValue(e.target.value)}
+                        placeholder="1"
+                        className="w-32 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    
+                    <div className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Student Name
+                      </label>
+                      <input
+                        ref={studentInputRef}
+                        type="text"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Type student name..."
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                      />
+                      
+                      {showSuggestions && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                          {suggestions.map((student, index) => (
+                            <div
+                              key={student.rowIndex}
+                              onClick={() => enterGrade(student)}
+                              className={`px-4 py-3 cursor-pointer transition ${
+                                index === selectedIndex 
+                                  ? 'bg-blue-50 text-blue-700' 
+                                  : 'hover:bg-gray-50'
+                              }`}
+                            >
+                              {student.name}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {recentEntry && (
+                      <div className="mt-4 p-3 bg-green-50 text-green-700 rounded-lg flex items-center">
+                        <Check className="w-5 h-5 mr-2" />
+                        {recentEntry}
+                      </div>
+                    )}
+                    
+                    <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                      <h3 className="font-semibold text-sm text-gray-700 mb-2">Quick Keys:</h3>
+                      <ul className="text-sm text-gray-600 space-y-1">
+                        <li>• Type to search students</li>
+                        <li>• Tab or ↑/↓ to navigate suggestions</li>
+                        <li>• Enter to confirm and add current grade value</li>
+                        <li>• Esc to close suggestions</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="w-96">
+                  <div className="bg-white rounded-lg shadow-md p-6">
+                    <h2 className="text-xl font-semibold mb-4">Grading Status</h2>
+                    
+                    <div className="mb-6">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">Progress</span>
+                        <span className="text-sm font-medium text-gray-700">
+                          {counts.graded} / {counts.total}
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-blue-600 h-2 rounded-full transition-all"
+                          style={{ width: `${counts.total > 0 ? (counts.graded / counts.total * 100) : 0}%` }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <div className="bg-gray-50 px-4 py-2 border-b border-gray-200">
+                        <h3 className="font-semibold text-sm text-gray-700">Students</h3>
+                      </div>
+                      <div className="max-h-96 overflow-y-auto">
+                        {students.map(student => {
+                          const grade = csvData[student.rowIndex][assignmentCol];
+                          const hasGrade = grade && grade.trim() !== '';
+                          return (
+                            <div 
+                              key={student.rowIndex}
+                              className={`px-4 py-2 border-b border-gray-100 flex justify-between items-center ${
+                                hasGrade ? 'bg-green-50' : ''
+                              }`}
+                            >
+                              <span className={`text-sm ${hasGrade ? 'text-green-700' : 'text-gray-600'}`}>
+                                {student.name}
+                              </span>
+                              <span className={`text-sm font-medium ${
+                                hasGrade ? 'text-green-700' : 'text-gray-400'
+                              }`}>
+                                {grade || '-'}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    
+                    <button
+                      onClick={exportCSV}
+                      className="w-full mt-6 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center justify-center"
+                    >
+                      <Download className="w-5 h-5 mr-2" />
+                      Export CSV
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<GradeEntryApp />, document.getElementById('root'));
+  </script>
+</body>
+</html>
